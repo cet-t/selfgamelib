@@ -15,34 +15,59 @@ namespace trrne
     class mathf
     {
     public:
-        inline static float round(float $a, int $digit)
+        inline static float round(float a_, int digit_)
         {
-            return floorf((powf($a * 10, $digit) * 2 + 1) / 2) / powf(10, $digit);
+            return floorf((powf(a_ * 10, digit_) * 2 + 1) / 2) / powf(10, digit_);
         }
 
-        inline static float round2(float $a)
+        inline static float round2(float a_)
         {
-            return $a > 0.f ? (long)($a + .5f) : (long)($a - .5f);
+            return a_ > 0.f ? (long)(a_ + .5f) : (long)(a_ - .5f);
         }
 
-        inline static float clamp(float $a, int $min_include, int $max_exclude)
+        inline static float clamp(float a_, int min_include_, int max_exclude_)
         {
-            // return $a < $min_include ? $min_include : $a > $max_exclude ? $max_exclude : $a;
-            if ($a < $min_include)
+            if (a_ < min_include_)
             {
-                return $min_include;
+                return min_include_;
             }
-            else if ($a > $max_exclude)
+            else if (a_ > max_exclude_)
             {
-                return $max_exclude;
+                return max_exclude_;
             }
-            return $a;
+            return a_;
         }
 
-        inline static float floor(float $a, int $digit)
+        inline static float floor(float a_, int digit_)
         {
-            float mul = powf(10, $digit);
-            return floorf($a * mul) / mul;
+            float mul = powf(10, digit_);
+            return floorf(a_ * mul) / mul;
+        }
+
+        inline static int kaijo(int n_)
+        {
+            if (n_ < 0)
+            {
+                return 0;
+            }
+            else if (n_ <= 2)
+            {
+                return n_;
+            }
+
+            for (int i = n_; i > 0; ++i)
+            {
+                n_ *= i;
+            }
+            return n_;
+        }
+
+        inline static int p(const int n_, const int r_)
+        {
+        }
+
+        inline static int c(const int n_, const int r_)
+        {
         }
     };
 }

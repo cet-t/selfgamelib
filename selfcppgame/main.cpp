@@ -45,18 +45,20 @@ int main()
 
     // cout << mathf::floor(0.1234567890, 2) << endl;
 
-    // cout << rnd::randfloat(0.0, 9.0) << endl;
-    vector<float> weights = {60, 30, 10};
-    float weights1[] = {100, 40, 5};
-    string rares[3]{"R", "SR", "SSR"};
-    // random_device rd;
-    for (int i = 0; i < 8; i++)
+    // vector<float> weights = {60, 30, 10};
+    // float weights1[] = {100, 40, 5};
+    // string rares[3]{"R", "SR", "SSR"};
+    // for (int i = 0; i < 8; i++)
     {
-        cout << rares[lottery::binary_search_tree(weights1, length(weights1))] << endl;
+        // cout << rares[lottery::binary_search_tree(weights1, length(weights1))] << endl;
         // cout << lottery::binary_search_tree(weights, weights.size()) << endl;
 
         // cout << rnd::randuniform(0, 10) << endl;
         // cout << rnd::randint(0, 10) << endl;
+
+        char out[10];
+        rnd::randchar(out, MIX, 10);
+        cout << out << endl;
     }
 
     // auto *name = new char[5];
