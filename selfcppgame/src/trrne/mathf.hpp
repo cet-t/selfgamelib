@@ -25,17 +25,19 @@ namespace trrne
             return a_ > 0.f ? (long)(a_ + .5f) : (long)(a_ - .5f);
         }
 
-        inline static float clamp(float a_, int min_include_, int max_exclude_)
+        inline static void clamp(float *a_, const float min_include_, const float max_exclude_)
         {
-            if (a_ < min_include_)
+            float *temp = new float;
+            if (*a_ < min_include_)
             {
-                return min_include_;
+                *temp = min_include_;
             }
-            else if (a_ > max_exclude_)
+            else if (*a_ > max_exclude_)
             {
-                return max_exclude_;
+                *temp = max_exclude_;
             }
-            return a_;
+            a_ = temp;
+            delete temp;
         }
 
         inline static float floor(float a_, int digit_)

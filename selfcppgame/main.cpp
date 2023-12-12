@@ -1,10 +1,12 @@
-#include <iostream>
+﻿#include <iostream>
 #include <map>
 #include <random>
 #include <ctime>
-#include <string>
+// #include <string>
 #include <vector>
 #include <mem.h>
+#include <math.h>
+#include <cstring>
 
 #include "src/trrne/trrne.hpp"
 #include "src/trrne/v2.hpp"
@@ -13,6 +15,7 @@
 
 using namespace trrne;
 using namespace std;
+using namespace chrono;
 
 struct ahokaina
 {
@@ -25,10 +28,33 @@ public:
     }
 };
 
+void randchar(char *out_, const int length_)
+{
+    const char alphabets[ALPHABET + 1] = {"abcdefghijklmnopqrstuvwxyz"};
+    const char numbers[NUMBER + 1] = {"0123456789"};
+
+    char *a = new char[ALPHABET + NUMBER + 1];
+    strncat(a, alphabets, ALPHABET);
+    strncat(a, numbers, NUMBER);
+    a[ALPHABET + NUMBER] = '\0';
+    // cout << "length:(" << ALPHABET + NUMBER << ")" << a << endl;
+    for (int i = 0; i < ALPHABET + NUMBER + 1; ++i)
+        cout << i << ": " << a[i] << endl;
+
+    char dst[length_];
+    for (int i = 0; i < length_; ++i)
+        dst[i] = a[rnd::randint(0, ALPHABET + NUMBER)];
+    dst[length_] = '\0';
+    strncpy(out_, dst, length_);
+    out_[length_ - 1] = '\0';
+
+    delete[] a;
+}
+
 int main()
 {
-    V2 a(2, 4), b(8, 15),
-        v2s[] = {a + b, a - b, a * b, a / b};
+    // V2 a(2, 4), b(8, 15),
+    //     v2s[] = {a + b, a - b, a * b, a / b};
     // cout << length(v2s) << endl;
     // for (auto &v : v2s)
     //     cout << v.to_string(1) << endl;
@@ -56,9 +82,10 @@ int main()
         // cout << rnd::randuniform(0, 10) << endl;
         // cout << rnd::randint(0, 10) << endl;
 
-        char out[10];
-        rnd::randchar(out, MIX, 10);
-        cout << out << endl;
+        const int length = 32;
+        char _out[length];
+        randchar(_out, length);
+        // cout << "out: " << _out << endl;
     }
 
     // auto *name = new char[5];

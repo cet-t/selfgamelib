@@ -11,12 +11,19 @@ using namespace std::chrono;
 #ifndef RND_HPP
 #define RND_HPP
 
-#define ALPHABET (26 + 1)
-#define NUMBER (10 + 1)
-#define MIX (ALPHABET + NUMBER)
+// #define ALPHABET 26
+// #define NUMBER 10
+// #define MIX (ALPHABET + NUMBER)
 
 namespace trrne
 {
+    enum class RND
+    {
+        ALPHABET = 26,
+        NUMBER = 10,
+        MIX = ALPHABET + NUMBER
+    };
+
     class rnd
     {
     public:
@@ -35,37 +42,52 @@ namespace trrne
             return (int)mathf::floor(uniform, 0);
         }
 
-        static void randchar(char *out_, const int type_, const int count_)
+        static void randchar(char *out_, const size_t length_, const RND rnd_) //, const int type_)
         {
-            const char alphabets[ALPHABET] = {"abcdefghijklmnopqrstuvwxyz"},
-                       numbers[NUMBER] = {"0123456789"};
-            char cands[type_];
-            auto choice = [&](char *chars)
+            const int AB = (int)RND::ALPHABET, N = (int)RND::NUMBER;
+            const char alphabets[AB + 1] = {"abcdefghijklmnopqrstuvwxyz"};
+            const char numbers[N + 1] = {"0123456789"};
+            char *a = new char[(int)RND::MIX];
+            strncat(a, alphabets, AB);
+            strncat(a, numbers, N);
+            char dst[length_];
+            for (int i = 0; i < length_; ++i)
             {
-                unique_ptr<char[]> selected = make_unique<char[]>(count_);
-                for (int i = 0; i < count_; ++i)
-                {
-                    selected[i] = cands[randint(0, type_ - 1)];
-                }
-                cout << selected.get() << endl;
-                return selected.get();
-            };
-
-            switch (type_)
-            {
-            case MIX:
-                strncat(cands, alphabets, ALPHABET);
-                strncat(cands, numbers, NUMBER);
-                cout << cands << endl;
-                strncpy(out_, choice(cands), count_);
-                break;
-            case ALPHABET:
-                break;
-            case NUMBER:
-                break;
-            default:
-                break;
+                dst[i] = a[randint(0, AB + N - 1)];
             }
+            strncpy(out_, dst, length_);
+            out_[length_ - 1] = '\0';
+
+            delete[] a;
+            // const char alphabets[ALPHABET] = {"abcdefghijklmnopqrstuvwxyz"},
+            //            numbers[NUMBER] = {"0123456789"};
+            // char cands[type_];
+            // auto choice = [&](char *chars)
+            // {
+            //     unique_ptr<char[]> selected = make_unique<char[]>(count_);
+            //     for (int i = 0; i < count_; ++i)
+            //     {
+            //         selected[i] = cands[randint(0, type_ - 1)];
+            //     }
+            //     cout << selected.get() << endl;
+            //     return selected.get();
+            // };
+
+            // switch (rnd_)
+            // {
+            // case RND::MIX:
+            //     strncat(cands, alphabets, ALPHABET);
+            //     strncat(cands, numbers, NUMBER);
+            //     cout << cands << endl;
+            //     strncpy(out_, choice(cands), count_);
+            //     break;
+            // case RND::ALPHABET:
+            //     break;
+            // case RND::NUMBER:
+            //     break;
+            // default:
+            //     break;
+            // }
         }
     };
 }
