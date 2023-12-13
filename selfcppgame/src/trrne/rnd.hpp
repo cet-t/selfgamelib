@@ -11,17 +11,20 @@ using namespace std::chrono;
 #ifndef RND_HPP
 #define RND_HPP
 
-// #define ALPHABET 26
-// #define NUMBER 10
-// #define MIX (ALPHABET + NUMBER)
-
 namespace trrne
 {
-    enum class RND
+    // enum class RND
+    // {
+    //     ALPHABET = 26,
+    //     NUMBER = 10,
+    //     MIX = ALPHABET + NUMBER
+    // };
+
+    enum RND
     {
-        ALPHABET = 26,
-        NUMBER = 10,
-        MIX = ALPHABET + NUMBER
+        RND_ALPHABET = 26,
+        RND_NUMBER = 10,
+        RND_MIX = RND_ALPHABET + RND_NUMBER
     };
 
     class rnd
@@ -42,52 +45,33 @@ namespace trrne
             return (int)mathf::floor(uniform, 0);
         }
 
-        static void randchar(char *out_, const size_t length_, const RND rnd_) //, const int type_)
+        static void randchar(char *out_, const int length_)
         {
-            const int AB = (int)RND::ALPHABET, N = (int)RND::NUMBER;
-            const char alphabets[AB + 1] = {"abcdefghijklmnopqrstuvwxyz"};
-            const char numbers[N + 1] = {"0123456789"};
-            char *a = new char[(int)RND::MIX];
-            strncat(a, alphabets, AB);
-            strncat(a, numbers, N);
+            const char alphabets[RND_ALPHABET + 1] = {"abcdefghijklmnopqrstuvwxyz"};
+            const char numbers[RND_NUMBER + 1] = {"0123456789"};
+            cout << "--------------- sonomama ---------------" << endl;
+            for (int i = 0; i < RND_ALPHABET + 1; ++i)
+                cout << "ab: " << alphabets[i] << endl;
+            for (int i = 0; i < RND_NUMBER + 1; ++i)
+                cout << "no: " << numbers[i] << endl;
+            cout << "----------------------------------------" << endl;
+
+            cout << "--------------- renketugo ---------------" << endl;
+            char cands[RND_ALPHABET + RND_NUMBER + 1] = {};
+            strncat(cands, alphabets, RND_ALPHABET);
+            strncat(cands, numbers, RND_NUMBER);
+            cands[RND_ALPHABET + RND_NUMBER] = '\0';
+            for (int i = 0; i < RND_ALPHABET + RND_NUMBER + 1; ++i)
+                cout << i << ": " << cands[i] << endl;
+            // cout << a << endl;
+            cout << "----------------------------------------" << endl;
+
             char dst[length_];
             for (int i = 0; i < length_; ++i)
-            {
-                dst[i] = a[randint(0, AB + N - 1)];
-            }
+                dst[i] = cands[rnd::randint(0, RND_ALPHABET + RND_NUMBER)];
+            dst[length_] = '\0';
             strncpy(out_, dst, length_);
             out_[length_ - 1] = '\0';
-
-            delete[] a;
-            // const char alphabets[ALPHABET] = {"abcdefghijklmnopqrstuvwxyz"},
-            //            numbers[NUMBER] = {"0123456789"};
-            // char cands[type_];
-            // auto choice = [&](char *chars)
-            // {
-            //     unique_ptr<char[]> selected = make_unique<char[]>(count_);
-            //     for (int i = 0; i < count_; ++i)
-            //     {
-            //         selected[i] = cands[randint(0, type_ - 1)];
-            //     }
-            //     cout << selected.get() << endl;
-            //     return selected.get();
-            // };
-
-            // switch (rnd_)
-            // {
-            // case RND::MIX:
-            //     strncat(cands, alphabets, ALPHABET);
-            //     strncat(cands, numbers, NUMBER);
-            //     cout << cands << endl;
-            //     strncpy(out_, choice(cands), count_);
-            //     break;
-            // case RND::ALPHABET:
-            //     break;
-            // case RND::NUMBER:
-            //     break;
-            // default:
-            //     break;
-            // }
         }
     };
 }
