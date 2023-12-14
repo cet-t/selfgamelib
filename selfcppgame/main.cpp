@@ -2,7 +2,6 @@
 #include <map>
 #include <random>
 #include <ctime>
-// #include <string>
 #include <vector>
 #include <mem.h>
 #include <math.h>
@@ -15,24 +14,13 @@
 
 using namespace trrne;
 using namespace std;
-using namespace chrono;
-
-struct ahokaina
-{
-public:
-    char name[32];
-    ahokaina(char *$name)
-    {
-        strncpy(name, $name, length(name));
-        name[length(name)] = '\0';
-    }
-};
 
 int main()
 {
-    // V2 a(2, 4), b(8, 15),
-    //     v2s[] = {a + b, a - b, a * b, a / b};
-    // cout << length(v2s) << endl;
+    V2 a(2, 4), b(8, 15), v2s[] = {a + b, a - b, a * b, a / b};
+    cout << length(v2s) << endl;
+    a.set(0, 1);
+    cout << a << endl;
     // for (auto &v : v2s)
     //     cout << v.to_string(1) << endl;
     // cout << "length: " << length(v2s) << endl;
@@ -59,18 +47,11 @@ int main()
         // cout << rnd::randuniform(0, 10) << endl;
         // cout << rnd::randint(0, 10) << endl;
 
-        const int length = 32;
-        char _out[length] = {};
-        rnd::randchar(_out, length);
-        cout << "out: " << _out << endl;
+        // const int length = 32;
+        // char _out[length] = {};
+        // rnd::randchar(_out, length);
+        // cout << "out: " << _out << endl;
     }
-
-    // auto *name = new char[5];
-    // strncpy(name, "kara\0", 5);
-    // ahokaina t(name);
-    // // ahokaina t("kara"); // よくない
-    // cout << t.name << endl;
-    // delete[] name;
 
     return 0;
 }

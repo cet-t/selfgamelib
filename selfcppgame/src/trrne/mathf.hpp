@@ -1,3 +1,6 @@
+#ifndef MATHF_HPP
+#define MATHF_HPP
+
 #include <math.h>
 
 using namespace std;
@@ -6,9 +9,6 @@ using namespace std;
 #define PI (3.14159)
 #define RAD_2_DEG (180 / PI)
 #define DEG_2_RAD (PI / 180)
-
-#ifndef MATHF_HPP
-#define MATHF_HPP
 
 namespace trrne
 {

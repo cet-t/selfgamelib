@@ -1,9 +1,9 @@
+#ifndef TRRNE_HPP
+#define TRRNE_HPP
+
 #include <memory>
 
 using namespace std;
-
-#ifndef TRRNE_HPP
-#define TRRNE_HPP
 
 template <class T, signed L>
 static int length(T (&array_)[L])

@@ -1,3 +1,6 @@
+#ifndef RND_HPP
+#define RND_HPP
+
 #include <mem.h>
 #include <memory>
 #include <random>
@@ -7,9 +10,6 @@
 
 using namespace std;
 using namespace std::chrono;
-
-#ifndef RND_HPP
-#define RND_HPP
 
 namespace trrne
 {

@@ -1,3 +1,6 @@
+#ifndef LOTTERY_HPP
+#define LOTTERY_HPP
+
 #include <iostream>
 #include <vector>
 #include <map>
@@ -7,9 +10,6 @@
 #include "rnd.hpp"
 
 using namespace std;
-
-#ifndef LOTTERY_HPP
-#define LOTTERY_HPP
 
 namespace trrne
 {
@@ -53,23 +53,23 @@ namespace trrne
     class lottery
     {
     public:
-        static int binary_search_tree(const float *weights_arr_, const int length_)
+        static int binary_search_tree(const float *weights_arr_, const int length)
         {
-            float weights[length_];
-            for (int i = 0; i < length_; i++)
+            float weights[length];
+            for (int i = 0; i < length; i++)
             {
                 weights[i] = weights_arr_[i];
             }
 
-            float totals[length_], total = 0.f;
-            for (int i = 0; i < length_; i++)
+            float totals[length], total = 0.f;
+            for (int i = 0; i < length; i++)
             {
                 total += weights[i];
                 totals[i] = total;
             }
 
             float random = rnd::randuniform(0, total);
-            int bottom = 0, top = length_ - 1;
+            int bottom = 0, top = length - 1;
             while (bottom < top)
             {
                 int middle = (top + bottom) / 2;
