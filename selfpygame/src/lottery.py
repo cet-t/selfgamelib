@@ -20,7 +20,7 @@ class LotteryPair(Generic[TSubject]):
 
 class Lottery(Generic[TSubject]):
     @staticmethod
-    def binary_search_tree(weights: list[float]) -> int:
+    def bst(weights: list[float]) -> int:
         '''二分探索木'''
         if len(weights) <= 0:
             raise Exception('からっぽやんけ')
@@ -30,6 +30,8 @@ class Lottery(Generic[TSubject]):
         for i in range(len(weights)):
             total += weights[i]
             totals.append(total)
+        for i in totals:
+            print(f'totals: {i}')
 
         rnd: float = random.uniform(0, total)
         bottom: int = 0
@@ -39,7 +41,8 @@ class Lottery(Generic[TSubject]):
             if rnd > totals[center]:
                 bottom = center+1
             else:
-                if rnd >= totals[center-1] if center > 0 else 0.0:
+                p: float = totals[center-1] if center > 0 else 0.0
+                if rnd >= p:
                     return center
                 top = center
         return top
@@ -48,4 +51,4 @@ class Lottery(Generic[TSubject]):
     def weighted(pairs: LotteryPair[TSubject]) -> TSubject:
         if pairs.size() <= 0:
             raise Exception()
-        return pairs.subjects[Lottery.binary_search_tree(pairs.weights)] if pairs.size() != 1 else pairs.subjects[0]
+        return pairs.subjects[Lottery.bst(pairs.weights)] if pairs.size() != 1 else pairs.subjects[0]

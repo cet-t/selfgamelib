@@ -6,12 +6,12 @@ from src.randomf import Rnd, STRTYPE
 
 
 if __name__ == '__main__':
-    a = V2(3, 6)
-    b = V2(4, 1)
+    # a = V2(3, 6)
+    # b = V2(4, 1)
     # print(V2.distance(a, b))
 
     # t = tupletest(('kara', 10), ('oko', 7), ('kuri', 7), ('goma', 6))
-    # # t = test('kara', 10, 'oko', 7, 'kuri', 7, 'goma', 6)
+    # t = test('kara', 10, 'oko', 7, 'kuri', 7, 'goma', 6)
     # print(t.pair())
     # print(t.subjects())
     # print(t.weights())
@@ -25,19 +25,19 @@ if __name__ == '__main__':
     # # print(Lottery.weighted(pairs=pairs))
     # print(Lottery.bst(weights=pairs.weights()))
 
-    # percentage = LotteryPair([('SSR', 1), ('SR', 3), ('R', 96)])
-    # ssr = []
-    # sr = []
-    # r = []
-    # for _ in range(1000):
-    #     choice = Lottery.weighted(percentage)
-    #     if choice == 'SSR':
-    #         ssr.append(choice)
-    #     elif choice == 'SR':
-    #         sr.append(choice)
-    #     else:
-    #         r.append(choice)
-    # print(f'SSR: {len(ssr)}\nSR : {len(sr)}\nR  : {len(r)}')
+    percentage = LotteryPair([('SSR', 0.1), ('SR', 50), ('R', 150)])
+    ssr = []
+    sr = []
+    r = []
+    for _ in range(1000):
+        choice = Lottery.weighted(percentage)
+        if choice == 'SSR':
+            ssr.append(choice)
+        elif choice == 'SR':
+            sr.append(choice)
+        else:
+            r.append(choice)
+    print(f'SSR: {len(ssr)}\nSR : {len(sr)}\nR  : {len(r)}')
 
-    for i in range(1, 11, 1):
-        print(Rnd.randstr(i, STRTYPE.MIX))
+    # for i in range(1, 11, 1):
+    #     print(Rnd.randstr(i, STRTYPE.MIX))
