@@ -5,7 +5,8 @@
 #include <string>
 #include <sstream>
 
-#include "mathf.h"
+#include "numpp.h"
+#include "v3.h"
 
 using namespace std;
 
@@ -37,9 +38,10 @@ namespace trrne {
 		const bool operator!=(const V2 &a) const noexcept;
 		friend ostream &operator<<(ostream &os, const V2 &a) noexcept;
 		operator string() const noexcept;
-		//operator float() const noexcept;
 		const string to_str() const noexcept;
 		const string to_str(const int digit) const noexcept;
+
+		const V2 floorf(const int digit) const noexcept;
 
 		const float magnitude() const noexcept;
 		const float magnitude(const int digit) const noexcept;

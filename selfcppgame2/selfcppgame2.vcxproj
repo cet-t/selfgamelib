@@ -134,19 +134,21 @@
     <ClCompile Include="lottery.cpp" />
     <ClCompile Include="lottery_pair.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mathf.cpp" />
+    <ClCompile Include="numpp.cpp" />
     <ClCompile Include="rnd.cpp" />
     <ClCompile Include="trrne.cpp" />
-    <ClCompile Include="V2.cpp" />
+    <ClCompile Include="v2.cpp" />
+    <ClCompile Include="v3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crypto22.h" />
     <ClInclude Include="lottery.h" />
     <ClInclude Include="lottery_pair.h" />
-    <ClInclude Include="mathf.h" />
+    <ClInclude Include="numpp.h" />
     <ClInclude Include="rnd.h" />
     <ClInclude Include="trrne.h" />
-    <ClInclude Include="V2.h" />
+    <ClInclude Include="v2.h" />
+    <ClInclude Include="v3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

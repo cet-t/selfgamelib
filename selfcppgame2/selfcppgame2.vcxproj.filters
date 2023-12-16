@@ -24,19 +24,22 @@
     <ClCompile Include="rnd.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="mathf.cpp">
+    <ClCompile Include="numpp.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="lottery_pair.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="V2.cpp">
+    <ClCompile Include="v2.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="trrne.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="crypto22.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="v3.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,19 +50,22 @@
     <ClInclude Include="rnd.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="mathf.h">
+    <ClInclude Include="numpp.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="lottery_pair.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="V2.h">
+    <ClInclude Include="v2.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="trrne.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="crypto22.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="v3.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
