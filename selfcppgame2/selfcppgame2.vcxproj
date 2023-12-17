@@ -130,14 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="crypto22.cpp" />
-    <ClCompile Include="lottery.cpp" />
-    <ClCompile Include="lottery_pair.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="numpp.cpp" />
-    <ClCompile Include="rnd.cpp" />
-    <ClCompile Include="trrne.cpp" />
-    <ClCompile Include="v2.cpp" />
     <ClCompile Include="v3.cpp" />
   </ItemGroup>
   <ItemGroup>

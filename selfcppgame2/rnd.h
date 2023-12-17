@@ -22,42 +22,51 @@ namespace trrne {
 	};
 
 	class rnd {
-	private:
 	public:
-		const static float randfloat(const float min_in, const float max_ex) noexcept;
-		/*const static float randfloat(const float min_in, const float max_ex) noexcept {
+		inline static const float randfloat(const float min_in, const float max_ex) noexcept {
 			system_clock::duration now = system_clock::now().time_since_epoch();
-			system_clock::rep ns = duration_cast<nanoseconds>(now).count();
-			mt19937_64 mt64(ns);
+			mt19937_64 mt(duration_cast<nanoseconds>(now).count());
 			uniform_real_distribution<float> r(min_in, max_ex - 1);
-			return r(mt64);
-		}*/
+			return r(mt);
+		}
 
-		const static int randint(const int min_in, const int max_ex);
-		/*static int randint(const int min_in, const int max_ex) {
-			auto uniform = randfloat(min_in, max_ex - 1);
-			return (int)mathf::floor(uniform, 0);
-		}*/
+		inline static const int randint(const int min_in, const int max_ex) {
+			system_clock::duration now = system_clock::now().time_since_epoch();
+			mt19937_64 mt(duration_cast<nanoseconds>(now).count());
+			uniform_int_distribution<int> r(min_in, max_ex - 1);
+			return r(mt);
+		}
 
-		static void randchar(char *out, const int length);
-		//const static char *randchar(char *out, const int length);
-		/*static void randchar(char *out, const int length) {
+		inline static void randchar(char *out, const int length) {
 			constexpr char alphabets[RND_ALPHABET + 1] = { "abcdefghijklmnopqrstuvwxyz" },
 				numbers[RND_NUMBER + 1] = { "0123456789" };
 
-			char cands[RND_ALPHABET + RND_NUMBER + 1] = {};
-			strncat(cands, alphabets, RND_ALPHABET);
-			strncat(cands, numbers, RND_NUMBER);
-			cands[RND_ALPHABET + RND_NUMBER] = '\0';
-
-			char dst[length] = {};
+			char cands[RND_MIXED + 1] = {};
+			strncat_s(cands, alphabets, RND_ALPHABET);
+			strncat_s(cands, numbers, RND_NUMBER);
+			cands[RND_MIXED] = '\0';
+			char dst[RND_MIXED + 1] = {};
 			for (int i = 0; i < length; ++i) {
-				int choice = rnd::randint(0, RND_ALPHABET + RND_NUMBER);
-				dst[i] = cands[choice];
+				dst[i] = cands[randint(0, RND_MIXED)];
 			}
-			dst[length] = '\0';
+			dst[length - 1] = '\0';
 			memcpy(out, dst, length);
-		}*/
+		}
+
+		_declspec(deprecated) inline static char *randchar(const int length) {
+			constexpr char alphabets[RND_ALPHABET + 1] = { "abcdefghijklmnopqrstuvwxyz" },
+				numbers[RND_NUMBER + 1] = { "0123456789" };
+			char cands[RND_MIXED + 1] = {};
+			strncat_s(cands, alphabets, RND_ALPHABET);
+			strncat_s(cands, numbers, RND_NUMBER);
+			cands[RND_MIXED] = '\0';
+			char dst[RND_MIXED + 1] = {};
+			for (int i = 0; i < length; ++i) {
+				dst[i] = cands[randint(0, RND_MIXED)];
+			}
+			dst[length - 1] = '\0';
+			return dst;
+		}
 	};
 }
 

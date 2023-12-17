@@ -6,9 +6,10 @@
 #include <string>
 #include <math.h>
 
-#include "V2.h"
+#include "v2.h"
 #include "numpp.h"
 
+using namespace std;
 using namespace trrne;
 
 namespace trrne {

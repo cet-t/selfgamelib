@@ -1,4 +1,4 @@
-#include "V3.h"
+#include "v3.h"
 
 V3::V3() noexcept
 	:x(0.f), y(0.f), z(0.f) { }
