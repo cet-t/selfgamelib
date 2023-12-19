@@ -13,7 +13,7 @@ pub fn bst(weights: &[f32]) -> i32 {
     }
 
     let mut gen = rand::thread_rng();
-    let r = gen.gen_range(0 as f32..total);
+    let r: f32 = gen.gen_range(0.0..total);
     let mut top = weights.len() as i32;
     let mut bottom = 0;
     while top > bottom {
@@ -34,3 +34,21 @@ pub fn bst(weights: &[f32]) -> i32 {
     }
     top
 }
+
+pub fn weighted<T>(items: &[T], weights: &[f32]) -> T
+where
+    T: Copy,
+{
+    return items[bst(weights) as usize];
+}
+
+// pub struct LotteryPair<TItem, const N: usize> {
+//     pub items: [TItem; N],
+//     pub weights: [f32; N],
+// }
+
+// impl<TItem, const N: usize> LotteryPair<TItem, N> {
+//     pub fn new(items: [TItem; N], weights: [f32; N]) -> Self {
+//         LotteryPair { items, weights }
+//     }
+// }

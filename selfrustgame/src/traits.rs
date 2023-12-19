@@ -1,4 +1,5 @@
-﻿pub trait f32e {
+﻿#[allow(non_camel_case_types)]
+pub trait f32e {
     fn pif() -> f32;
     fn to_deg() -> f32;
     fn to_rad() -> f32;
