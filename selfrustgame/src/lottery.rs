@@ -41,14 +41,3 @@ where
 {
     return items[bst(weights) as usize];
 }
-
-// pub struct LotteryPair<TItem, const N: usize> {
-//     pub items: [TItem; N],
-//     pub weights: [f32; N],
-// }
-
-// impl<TItem, const N: usize> LotteryPair<TItem, N> {
-//     pub fn new(items: [TItem; N], weights: [f32; N]) -> Self {
-//         LotteryPair { items, weights }
-//     }
-// }

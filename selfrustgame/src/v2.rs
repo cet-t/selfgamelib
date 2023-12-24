@@ -3,27 +3,31 @@ use std::ops::*;
 
 #[derive(Debug, Clone, Copy)]
 pub struct V2 {
-    pub x: f32,
-    pub y: f32,
+    pub x: f64,
+    pub y: f64,
 }
 
 pub trait V2e {
-    fn new(x: f32, y: f32) -> V2;
+    fn new(x: f64, y: f64) -> V2;
     fn to_str(&self) -> String;
-
-    fn magnitude(&self) -> f32;
+    fn magnitude(&self) -> f64;
     fn normalize(&self) -> V2;
-    fn distance(a: &mut V2, b: &mut V2) -> f32;
-    fn dot(a: &mut V2, b: &mut V2) -> f32;
-    fn cross(a: &mut V2, b: &mut V2) -> f32;
-    fn angle(a: &mut V2, b: &mut V2) -> f32;
-
+    fn distance(a: &mut V2, b: &mut V2) -> f64;
+    fn dot(a: &mut V2, b: &mut V2) -> f64;
+    fn cross(a: &mut V2, b: &mut V2) -> f64;
+    fn angle(a: &mut V2, b: &mut V2) -> f64;
     fn from_polar(&self) -> V2;
     fn to_polar(&self) -> V2;
 }
 
+impl Default for V2 {
+    fn default() -> Self {
+        Self { x: 0., y: 0. }
+    }
+}
+
 impl V2e for V2 {
-    fn new(x: f32, y: f32) -> V2 {
+    fn new(x: f64, y: f64) -> V2 {
         V2 { x, y }
     }
 
@@ -31,42 +35,42 @@ impl V2e for V2 {
         format!("({}, {})", self.x, self.y)
     }
 
-    fn magnitude(&self) -> f32 {
-        f32::sqrtf(self.x * self.x + self.y * self.y)
+    fn magnitude(&self) -> f64 {
+        f64::sqrt(self.x * self.x + self.y * self.y)
     }
 
     fn normalize(&self) -> V2 {
         V2::new(self.x / self.magnitude(), self.y / self.magnitude())
     }
 
-    fn distance(a: &mut V2, b: &mut V2) -> f32 {
+    fn distance(a: &mut V2, b: &mut V2) -> f64 {
         (*a - *b).magnitude()
     }
 
-    fn dot(a: &mut V2, b: &mut V2) -> f32 {
+    fn dot(a: &mut V2, b: &mut V2) -> f64 {
         a.x * b.x + a.y * b.y
     }
 
-    fn cross(a: &mut V2, b: &mut V2) -> f32 {
+    fn cross(a: &mut V2, b: &mut V2) -> f64 {
         a.x * b.y - a.y * b.x
     }
 
-    fn angle(a: &mut V2, b: &mut V2) -> f32 {
+    fn angle(a: &mut V2, b: &mut V2) -> f64 {
         let (lal, lbl) = (a.magnitude(), b.magnitude());
-        if f32::absf(lal + lbl) < f32::EPSILON {
+        if f64::abs(lal + lbl) < f64::EPSILON {
             return 0.;
         }
-        f32::acosf(V2::dot(a, b) / lal / lbl) * f32::to_deg()
+        (V2::dot(a, b) / lal / lbl).acos() * f64::to_deg()
     }
 
     fn from_polar(&self) -> V2 {
-        V2::new(self.x * f32::cosf(self.y), self.x * f32::sinf(self.y))
+        V2::new(self.x * self.y.cos(), self.x * self.y.sin())
     }
 
     fn to_polar(&self) -> V2 {
         V2::new(
-            f32::sqrtf(self.x * self.x + self.y * self.y),
-            f32::atanf(self.y / self.x),
+            (self.x * self.x + self.y * self.y).sqrt(),
+            (self.y / self.x).atan(),
         )
     }
 }

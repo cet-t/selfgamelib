@@ -6,22 +6,22 @@
 
 using namespace std;
 
-constexpr float PI = 3.141592f;
+constexpr double PI = 3.141592;
 #define RAD_2_DEG (180 / PI)
 #define DEG_2_RAD (PI / 180)
 
 namespace trrne {
 	class numpp {
 	public:
-		static float round(const float a, int digit) noexcept {
-			return floorf((powf(a * 10, float(digit)) * 2 + 1) / 2) / powf(10, float(digit));
+		static double round(const double a, int digit) noexcept {
+			return floor((pow(a * 10, digit) * 2 + 1) / 2, 0) / pow(10, digit);
 		}
 
-		static float round2(const float a) noexcept {
-			return float(a > 0.f ? long(a + .5f) : long(a - .5f));
+		static double round2(const double a) noexcept {
+			return double(a > 0.f ? long(a + .5f) : long(a - .5f));
 		}
 
-		static void clamp(float &a, const float min, const float max) noexcept {
+		static void clamp(double &a, const double min, const double max) noexcept {
 			if (a < min) {
 				a = min;
 			} else if (a > max) {
@@ -29,7 +29,7 @@ namespace trrne {
 			}
 		}
 
-		static float clamp(float a, const float min, const float max) noexcept {
+		static double clamp(double a, const double min, const double max) noexcept {
 			if (a < min) {
 				return min;
 			} else if (a > max) {
@@ -38,12 +38,12 @@ namespace trrne {
 			return a;
 		}
 
-		static float floor(const float a, const int digit) noexcept {
-			float mul = powf(10, float(digit));
-			return floorf(a * mul) / mul;
+		static double floor(const double a, const int digit) noexcept {
+			double mul = pow(10, double(digit));
+			return std::floor(a * mul) / mul;
 		}
 
-		static int cutail(const float a) noexcept {
+		static int cutail(const double a) noexcept {
 			return int(floor(a, 0));
 		}
 
@@ -61,8 +61,8 @@ namespace trrne {
 			return dst;
 		}
 
-		static float permutation(const int n, const int r) noexcept {
-			return float(factorial(n) / factorial(n - r));
+		static double permutation(const int n, const int r) noexcept {
+			return double(factorial(n) / factorial(n - r));
 		}
 
 		static int combination(const int n, const int r) {
@@ -72,23 +72,23 @@ namespace trrne {
 			return factorial(n) / factorial(r) / factorial(n - r);
 		}
 
-		static float sigmoid(const float x) noexcept {
-			return 1 / (1 + expf(-x));
+		static double sigmoid(const double x) noexcept {
+			return 1 / (1 + exp(-x));
 		}
 
-		static float sigma(const int k, const int n) noexcept {
+		static double sigma(const int k, const int n) noexcept {
 			int dst = 0;
 			for (int i = k; i <= n; ++i) {
 				dst += i;
 			}
-			return float(dst);
+			return double(dst);
 		}
 
-		static bool twins(const float a, const float b, const float tolerance) noexcept {
-			return fabsf(a + b) < tolerance;
+		static bool twins(const double a, const double b, const double tolerance) noexcept {
+			return abs(a + b) < tolerance;
 		}
 
-		static bool twins(const float a, const float b) noexcept {
+		static bool twins(const double a, const double b) noexcept {
 			return twins(a, b, 1e-2f);
 		}
 	};

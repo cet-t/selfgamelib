@@ -7,17 +7,23 @@
 #include <ostream>
 
 #include "numpp.h"
+#include "v3.h"
 
 using namespace std;
 
 namespace trrne {
 	class V2 {
 	public:
-		double x, y;
+		float x, y;
 
-		constexpr V2() noexcept : x(0.f), y(0.f) { }
-		constexpr V2(double x, double y) noexcept : x(x), y(y) { }
-		constexpr V2(const V2 &other) noexcept : x(other.x), y(other.y) { }
+		constexpr V2() noexcept
+			: x(0.f), y(0.f) { }
+
+		constexpr V2(float x, float y) noexcept
+			: x(x), y(y) { }
+
+		constexpr V2(const V2 &other) noexcept
+			: x(other.x), y(other.y) { }
 
 		constexpr V2 operator+(const V2 &other) const noexcept {
 			return V2(x + other.x, y + other.y);
@@ -51,7 +57,7 @@ namespace trrne {
 			return V2(x * other.x, y * other.y);
 		}
 
-		constexpr V2 operator*(const double other) const noexcept {
+		constexpr V2 operator*(const float other) const noexcept {
 			return V2(x * other, y * other);
 		}
 
@@ -65,7 +71,7 @@ namespace trrne {
 			return V2(x / other.x, y / other.y);
 		}
 
-		constexpr V2 operator/(const double other) const noexcept {
+		constexpr V2 operator/(const float other) const noexcept {
 			return V2(x / other, y / other);
 		}
 
@@ -122,19 +128,19 @@ namespace trrne {
 			return V2(numpp::floor(x, digit), numpp::floor(y, digit));
 		}
 
-		const double magnitude() const noexcept {
-			return sqrt(x * x + y * y);
+		const float magnitude() const noexcept {
+			return sqrtf(x * x + y * y);
 		}
 
-		const static double magnitude(V2 &a) noexcept {
+		const static float magnitude(V2 &a) noexcept {
 			return a.magnitude();
 		}
 
-		const double distance(V2 &other) const noexcept {
+		const float distance(V2 &other) const noexcept {
 			return (*this - other).magnitude();
 		}
 
-		const static double distance(V2 &a, V2 &b) noexcept {
+		const static float distance(V2 &a, V2 &b) noexcept {
 			return a.distance(b);
 		}
 
@@ -146,43 +152,64 @@ namespace trrne {
 			return a.normalize();
 		}
 
-		const double dot(V2 &other) const noexcept {
+		const float dot(V2 &other) const noexcept {
 			return x * other.x + y * other.y;
 		}
 
-		const static double dot(V2 &a, V2 &b) noexcept {
+		const static float dot(V2 &a, V2 &b) noexcept {
 			return a.dot(b);
 		}
 
-		const double cross(V2 &other) const noexcept {
+		const float cross(V2 &other) const noexcept {
 			return x * other.y - y * other.x;
 		}
 
-		const static double cross(V2 &a, V2 &b) noexcept {
+		const static float cross(V2 &a, V2 &b) noexcept {
 			return a.cross(b);
 		}
 
-		const double angle(V2 &other) const noexcept {
-			double lselfl = magnitude(),
+		const float angle(V2 &other) const noexcept {
+			float lselfl = magnitude(),
 				lotherl = other.magnitude();
-			if (abs(lselfl + lotherl) < 1e-44f) {
-				return 0.0;
+			if (fabsf(lselfl + lotherl) < 1e-44f) {
+				return 0.f;
 			}
-			return acos(dot(other) / lselfl / lotherl) * RAD_2_DEG;
+			return acosf(dot(other) / lselfl / lotherl) * RAD_2_DEG;
 		}
 
-		const static double angle(V2 &a, V2 &b) noexcept {
+		const static float angle(V2 &a, V2 &b) noexcept {
 			return a.angle(b);
 		}
 
 		const V2 to_polar() noexcept {
-			return V2(x * cos(y), x * sin(y));
+			return V2(x * cosf(y), x * sinf(y));
 		}
 
 		const static V2 to_polar(V2 &a) noexcept {
 			return a.to_polar();
 		}
 	};
+
+	//ostream &trrne::operator<<(ostream &os, const V2 &a) noexcept {
+	//	os << "(" << a.x << ", " << a.y << ")"; // a.to_str();
+	//	return os;
+	//}
+
+	//constexpr V2 operator+(const float a, const V2 &b) noexcept {
+	//	return V2(a + b.x, a + b.y);
+	//}
+
+	//constexpr V2 operator-(const float a, const V2 &b) noexcept {
+	//	return V2(a - b.x, a - b.y);
+	//}
+
+	//constexpr V2 operator*(const float a, const V2 &b) noexcept {
+	//	return V2(a * b.x, a * b.y);
+	//}
+
+	//constexpr V2 operator/(const float a, const V2 &b) noexcept {
+	//	return V2(a / b.x, a / b.y);
+	//}
 }
 
 #endif // V2_H

@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>Q:\libs\cpp\boost_1_84_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -131,7 +131,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="v3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crypto22.h" />
@@ -141,7 +140,6 @@
     <ClInclude Include="rnd.h" />
     <ClInclude Include="trrne.h" />
     <ClInclude Include="v2.h" />
-    <ClInclude Include="v3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

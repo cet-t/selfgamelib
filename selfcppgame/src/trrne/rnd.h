@@ -45,12 +45,27 @@ namespace trrne {
 			strncat_s(cands, alphabets, RND_ALPHABET);
 			strncat_s(cands, numbers, RND_NUMBER);
 			cands[RND_MIXED] = '\0';
-			char dst[RND_MIXED + 1] {};
+			char dst[RND_MIXED + 1] = {};
 			for (int i = 0; i < length; ++i) {
 				dst[i] = cands[randint(0, RND_MIXED)];
 			}
 			dst[length - 1] = '\0';
 			memcpy(out, dst, length);
+		}
+
+		_declspec(deprecated) inline static char *randchar(const int length) {
+			constexpr char alphabets[RND_ALPHABET + 1] = { "abcdefghijklmnopqrstuvwxyz" },
+				numbers[RND_NUMBER + 1] = { "0123456789" };
+			char cands[RND_MIXED + 1] = {};
+			strncat_s(cands, alphabets, RND_ALPHABET);
+			strncat_s(cands, numbers, RND_NUMBER);
+			cands[RND_MIXED] = '\0';
+			char dst[RND_MIXED + 1] = {};
+			for (int i = 0; i < length; ++i) {
+				dst[i] = cands[randint(0, RND_MIXED)];
+			}
+			dst[length - 1] = '\0';
+			return dst;
 		}
 	};
 }
