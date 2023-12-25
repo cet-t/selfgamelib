@@ -37,9 +37,9 @@ pub trait ArrayExt<T> {
     fn sum(array: &[T]) -> T;
 }
 
-impl ArrayExt<f32> for [f32] {
-    fn sum(array: &[f32]) -> f32 {
-        let mut dst: f32 = 0.;
+impl ArrayExt<f64> for [f64] {
+    fn sum(array: &[f64]) -> f64 {
+        let mut dst: f64 = 0.;
         for i in array {
             dst += i;
         }
