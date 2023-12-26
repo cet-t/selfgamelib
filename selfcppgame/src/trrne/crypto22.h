@@ -6,7 +6,7 @@
 #include <cryptopp/modes.h>
 #include <cryptopp/filters.h>
 #include <cryptopp/secblock.h>
-#include <string.h>
+#include <string>
 
 using namespace std;
 using namespace CryptoPP;
