@@ -8,7 +8,7 @@ public class LotteryPair<T>
     public LotteryPair(params (T subject, double weight)[] pairs)
     {
         Len = pairs.Length;
-        Array.ForEach(pairs, pair =>
+        pairs.ForEach(pair =>
         {
             subjects.Add(pair.subject);
             weights.Add(pair.weight);
@@ -19,7 +19,6 @@ public class LotteryPair<T>
 
     public T[] Subjects => [.. subjects];
     public double[] Weights => [.. weights];
-
     public double TotalWeights => weights.Sum();
 
     public object this[int index] => (subjects[index], weights[index]);

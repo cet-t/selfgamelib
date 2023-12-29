@@ -44,9 +44,9 @@ class Rnd:
 
     @staticmethod
     def randint(min=0, max=0) -> int:
-        if not isinstance(min, int) or not isinstance(max, int):
-            raise TypeError
-        return SystemRandom().randint(int(min), int(max))
+        if isinstance(min, int) or isinstance(max, int):
+            return SystemRandom().randint(int(min), int(max))
+        raise TypeError
 
     @staticmethod
     def randfloat(min=0.0, max=0.0) -> float:

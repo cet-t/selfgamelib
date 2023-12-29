@@ -2,8 +2,11 @@
 
 public static class M
 {
-    public static double ToDeg(double rad) => rad * (180 / Math.PI);
-    public static double ToRad(double deg) => deg * (Math.PI / 180);
+    public const double RadToDeg = 180 / Math.PI;
+    public const double DegToRad = Math.PI / 180;
+
+    public static double ToDeg(double rad) => rad * RadToDeg;
+    public static double ToRad(double deg) => deg * DegToRad;
 
     public static double Floor(double n, int digit)
     {
@@ -31,6 +34,6 @@ public static class M
     }
 
     public static ulong Permutation(int n, int r) => Factorial(n) / Factorial(n - r);
-    public static ulong Combination(int n, int r)
-    => (r >= 0 && n >= r) ? throw new Exception() : Factorial(n) / (Factorial(r) * Factorial(n - r));
+    public static ulong? Combination(int n, int r)
+    => (r >= 0 && n >= r) ? null : Factorial(n) / (Factorial(r) * Factorial(n - r));
 }

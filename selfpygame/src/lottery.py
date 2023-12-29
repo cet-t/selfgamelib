@@ -1,54 +1,63 @@
 ﻿from typing import Generic, TypeVar
-import random
+from random import uniform
 
-TSubject = TypeVar('TSubject')
+T = TypeVar('T')
 
 
-class LotteryPair(Generic[TSubject]):
-    def __init__(self, pairs: list[tuple[TSubject, float]]) -> None:
+class LotteryPair(Generic[T]):
+    def __init__(self, pairs: list[tuple[T, float]]) -> None:
         super().__init__()
-        self.pairs: list[tuple[TSubject, float]] = pairs
-        self.subjects: list[TSubject] = []
-        self.weights: list[float] = []
+        self.__pairs: list[tuple[T, float]] = pairs
+        self.__subjects: list[T] = []
+        self.__weights: list[float] = []
         for i in range(len(pairs)):
-            self.subjects.append(pairs[i][0])
-            self.weights.append(pairs[i][1])
+            self.__subjects.append(pairs[i][0])
+            self.__weights.append(pairs[i][1])
 
-    def size(self) -> int:
-        return len(self.pairs)
+    def length(self) -> int: return len(self.__pairs)
+
+    def pairs(self) -> list[tuple[T, float]]: return self.__pairs
+    def subjects(self) -> list[T]: return self.__subjects
+    def weights(self) -> list[float]: return self.__weights
+
+    def total_weight(self) -> float:
+        dst = 0
+        for weight in self.__weights:
+            dst += weight
+        return dst
 
 
-class Lottery(Generic[TSubject]):
+class Lottery(Generic[T]):
     @staticmethod
     def bst(weights: list[float]) -> int:
         '''二分探索木'''
         if len(weights) <= 0:
-            raise Exception('からっぽやんけ')
+            # raise Exception('からっぽやんけ')
+            return -1
 
         totals: list[float] = []
         total: float = 0.0
         for i in range(len(weights)):
             total += weights[i]
             totals.append(total)
-        for i in totals:
-            print(f'totals: {i}')
+        # for i in totals:
+        #     print(f'totals: {i}')
 
-        rnd: float = random.uniform(0, total)
+        r: float = uniform(0, total)
         bottom: int = 0
         top: int = len(totals)-1
         while bottom < top:
             center: int = int((bottom+top)/2)
-            if rnd > totals[center]:
+            if r > totals[center]:
                 bottom = center+1
             else:
-                p: float = totals[center-1] if center > 0 else 0.0
-                if rnd >= p:
+                if r >= totals[center-1] if center > 0 else 0.0:
                     return center
                 top = center
         return top
 
     @staticmethod
-    def weighted(pairs: LotteryPair[TSubject]) -> TSubject:
-        if pairs.size() <= 0:
+    def weighted(pairs: LotteryPair[T]) -> T:
+        if pairs.length() <= 0:
             raise Exception()
-        return pairs.subjects[Lottery.bst(pairs.weights)] if pairs.size() != 1 else pairs.subjects[0]
+        return pairs.__subjects[Lottery.bst(pairs.__weights)] if pairs.length() != 1 else pairs.__subjects[0]

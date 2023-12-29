@@ -2,6 +2,8 @@
 using System.Security.Cryptography;
 using trrne;
 
+Console.OutputEncoding = Encoding.GetEncoding("utf-8");
+
 void println(object obj) => Console.WriteLine(obj);
 double rand(double min = -10, double max = 10) => new Random().NextDouble() * (max - min) + min;
 
@@ -13,22 +15,26 @@ void Loop<T>(int loop, Func<T> func)
     }
 }
 
-void Space(string title, Func<object> func)
+void Space(in string title, in char design, in Func<object> func)
 {
-    string line = "------------------------------";
-    println(line + " " + title + " " + line);
-    println(func());
-    string dst = line + line + "--";
-    for (int i = 0; i < title.Length; ++i)
+    string line = "";
+    for (int i = 0; i < 32; ++i)
     {
-        dst += "-";
+        line += design;
+    }
+    println(line + "|| " + title + " ||" + line);
+    println(func());
+    string dst = line + line; // + design + design;
+    for (int i = 0; i < title.Length + 6; ++i)
+    {
+        dst += design;
     }
     println(dst);
 }
 
 const string N = "\n";
 
-Space("v2", () =>
+Space("v2", '-', () =>
 {
     string dst = "";
 
@@ -37,27 +43,32 @@ Space("v2", () =>
     dst += "+a          : " + (+a).Str() + N;
     dst += "-b          : " + (-b).Str() + N;
     dst += "a+b         : " + (a + b).Str() + N;
+    dst += "a+=b        : " + (a += b).Str() + N;
     dst += "a-b         : " + (a - b).Str() + N;
+    dst += "a-=b        : " + (a -= b).Str() + N;
     dst += "a*b         : " + (a * b).Str() + N;
+    dst += "a*=b        : " + (a *= b).Str() + N;
     dst += "a/b         : " + (a / b).Str() + N;
+    dst += "a/=b        : " + (a /= b).Str() + N;
     dst += "a>b         : " + (a > b) + N;
     dst += "a>=b        : " + (a >= b) + N;
     dst += "a<b         : " + (a < b) + N;
     dst += "a<=b        : " + (a <= b) + N;
     dst += "a==b        : " + (a == b) + N;
     dst += "a!=b        : " + (a != b) + N;
-    dst += "a.magnitude : " + a.Mag + N;
-    dst += "b.magnitude : " + b.Mag + N;
-    dst += "a.normalize : " + a.Nor.Str() + N;
-    dst += "b.normalize : " + b.Nor.Str() + N;
+    dst += "a.mag       : " + a.Mag + N;
+    dst += "b.mag       : " + b.Mag + N;
+    dst += "a.nor       : " + a.Nor.Str() + N;
+    dst += "b.nor       : " + b.Nor.Str() + N;
     dst += "dot         : " + V2.Dot(a, b) + N;
     dst += "dot2        : " + V2.Dot2(a, b) + N;
     dst += "angle       : " + V2.Angle(a, b) + N;
     dst += "menseki?    : " + V2.NankanoMenseki(a, b) + N;
+
     return dst;
 });
 
-Space("v3", () =>
+Space("v3", '-', () =>
 {
     string dst = "";
 
@@ -66,9 +77,13 @@ Space("v3", () =>
     dst += "+a          : " + (+a).Str() + N;
     dst += "-b          : " + (-b).Str() + N;
     dst += "a+b         : " + (a + b).Str() + N;
+    dst += "a+=b        : " + (a += b).Str() + N;
     dst += "a-b         : " + (a - b).Str() + N;
+    dst += "a-=b        : " + (a -= b).Str() + N;
     dst += "a*b         : " + (a * b).Str() + N;
+    dst += "a*=b        : " + (a *= b).Str() + N;
     dst += "a/b         : " + (a / b).Str() + N;
+    dst += "a/=b        : " + (a /= b).Str() + N;
     dst += "a>b         : " + (a > b) + N;
     dst += "a>=b        : " + (a >= b) + N;
     dst += "a<b         : " + (a < b) + N;
@@ -81,10 +96,11 @@ Space("v3", () =>
     dst += "b.nor       : " + (string)b.Nor + N;
     dst += "dot         : " + V3.Dot(a, b) + N;
     dst += "dot2        : " + V3.Dot2(a, b) + N;
+
     return dst;
 });
 
-Space("lottery", () =>
+Space("lottery", '-', () =>
 {
     string dst = "";
 
@@ -109,10 +125,11 @@ Space("lottery", () =>
             dst += N;
         }
     }
+
     return dst;
 });
 
-Space("rsa", () =>
+Space("rsa", '-', () =>
 {
     const string SRC = "karachan";
     string dst = "src: " + SRC + N;
@@ -121,33 +138,37 @@ Space("rsa", () =>
     {
         MyRSA mrsa = new(RSAEncryptionPadding.Pkcs1);
         byte[] en = mrsa.En(SRC);
-        dst += "en: {" + Encoding.UTF8.GetString(en) + "}" + N + N;
-        dst += "de: {" + mrsa.De2Str(en) + "}" + N;
+        dst += "en      : {" + Encoding.UTF8.GetString(en) + "}" + N + N;
+        dst += "de      : {" + mrsa.De2Str(en) + "}" + N;
     }
 
     dst += "=========static=========" + N;
     {
         byte[] en = MyRSA.En(SRC);
-        dst += "en: {" + Encoding.UTF8.GetString(en) + "}" + N + N;
-        dst += "de: {" + MyRSA.De2Str(en) + "}" + N;
+        dst += "en      : {" + Encoding.UTF8.GetString(en) + "}" + N + N;
+        dst += "de      : {" + MyRSA.De2Str(en) + "}" + N;
     }
 
     return dst;
 });
 
-Space("math", () =>
+Space("math", '-', () =>
 {
     string dst = "";
 
-    const int L = 20; // 20以上は無理
+    const int L = 21; // 171;
     for (int i = 1; i <= L; ++i)
     {
-        dst += i + "!: " + M.Factorial(i);
+        dst += i.ToString().PadLeft(2, ' ') + "!: " + M.Factorial(i); // ~20
         if (i < L)
         {
             dst += N;
         }
     }
-    // dst += N + "max: " + ulong.MaxValue;
+
     return dst;
 });
+
+/*
+str padding     https://kuroeveryday.blogspot.com/2014/03/padding.html
+*/

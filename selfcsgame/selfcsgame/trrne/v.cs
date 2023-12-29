@@ -43,6 +43,10 @@ public class V2(double x, double y)
     public static V2 operator /(V2 a, double b) => new(a.x / b, a.y / b);
     public static V2 operator /(double a, V2 b) => new(a / b.x, a / b.y);
 
+    public static V2 operator %(V2 a, V2 b) => new(a.x % b.x, a.y % b.y);
+    public static V2 operator %(V2 a, double b) => new(a.x % b, a.y % b);
+    public static V2 operator %(double a, V2 b) => new(a % b.x, a % b.y);
+
     public static bool operator ==(V2 a, V2 b) => a.x == b.x && a.y == b.y;
     public static bool operator !=(V2 a, V2 b) => a.x != b.x && a.y != b.y;
 
@@ -97,6 +101,10 @@ public sealed class V3(double x, double y, double z)
     public static V3 operator /(V3 a, V3 b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
     public static V3 operator /(V3 a, double b) => new(a.x / b, a.y / b, a.z / b);
     public static V3 operator /(double a, V3 b) => new(a / b.x, a / b.y, a / b.z);
+
+    public static V3 operator %(V3 a, V3 b) => new(a.x % b.x, a.y % b.y, a.z % b.z);
+    public static V3 operator %(V3 a, double b) => new(a.x % b, a.y % b, a.z % b);
+    public static V3 operator %(double a, V3 b) => new(a % b.x, a % b.y, a % b.z);
 
     public static bool operator ==(V3 a, V3 b) => a.x == b.x && a.y == b.y && a.z == b.z;
     public static bool operator !=(V3 a, V3 b) => !(a == b);
