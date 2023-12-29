@@ -22,7 +22,7 @@ unique_ptr<U> dynamic_unique_cast(unique_ptr<T> &&ptr)
 	return unique_ptr<U>(dynamic_cast<U *>(ptr.release()));
 }
 
-string to_str(const bool a)
+string str(const bool a)
 {
 	return a ? "true" : "false";
 }

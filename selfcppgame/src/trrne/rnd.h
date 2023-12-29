@@ -2,7 +2,6 @@
 #define RND_HPP
 
 #include <bits/stdc++.h>
-
 #include "numpp.h"
 
 using namespace std;
@@ -23,21 +22,20 @@ namespace trrne
 	public:
 		inline static const double randdouble(double min_in, const double max_ex) noexcept
 		{
-			system_clock::duration now = system_clock::now().time_since_epoch();
-			mt19937_64 mt(duration_cast<nanoseconds>(now).count());
+			mt19937_64 mt(duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count());
 			uniform_real_distribution<double> r(min_in, max_ex - 1);
 			return r(mt);
 		}
 
 		inline static const int randint(const int min_in, const int max_ex)
 		{
-			return int(randdouble(min_in, max_ex));
+			return floor(randdouble(min_in, max_ex));
 		}
 
 		inline static void randchar(char *out, const int length)
 		{
-			constexpr char alphabets[RND_ALPHABET + 1] = {"abcdefghijklmnopqrstuvwxyz"},
-													numbers[RND_NUMBER + 1] = {"0123456789"};
+			constexpr char alphabets[RND_ALPHABET + 1] = {"abcdefghijklmnopqrstuvwxyz"};
+			constexpr char numbers[RND_NUMBER + 1] = {"0123456789"};
 
 			char cands[RND_MIXED + 1] = {};
 			strncat_s(cands, alphabets, RND_ALPHABET);
@@ -49,7 +47,8 @@ namespace trrne
 				dst[i] = cands[randint(0, RND_MIXED)];
 			}
 			dst[length - 1] = '\0';
-			memcpy(out, dst, length);
+			// memcpy(out, dst, length);
+			strncpy(out, dst, length);
 		}
 	};
 }
