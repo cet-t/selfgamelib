@@ -1,6 +1,6 @@
 ﻿from dataclasses import dataclass
-from typing import Any
 from numpy import *
+from src.m import *
 
 
 @dataclass
@@ -8,12 +8,17 @@ class V2:
     x: float
     y: float
 
-    def mag(self): return sqrt(self.x * self.x + self.y * self.y)
+    def mag(self) -> float: return sqrt(self.x * self.x + self.y * self.y)
     def nor(self): return V2(self.x / self.mag(), self.y / self.mag())
 
     @staticmethod
-    def dot(a, b):
-        return (a.x * b.x + a.y * b.y) if isinstance(a, V2) and isinstance(b, V2) else 720
+    def dot(a, b) -> int | float:
+        if isinstance(a, V2) and isinstance(b, V2):
+            norm = (a.mag(), b.mag())
+            if abs(norm[0]+norm[1]) >= 1e-5:
+                return 0
+            return arccos(dot(a, b)/norm[0]/norm[1]) * RAD_TO_DEG
+        raise TypeError()
 
     # Operators
 
@@ -332,7 +337,6 @@ class V2:
         raise TypeError()
 
     def __str__(self): return f'({self.x},{self.y})'
-    def to_str(self): return self.__str__()
 
 
 ZERO = V2(0, 0)

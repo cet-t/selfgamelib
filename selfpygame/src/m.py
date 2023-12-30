@@ -1,36 +1,36 @@
 ﻿import numpy as np
-import decimal
 
-PI: float = 3.141592653589793
-DEG_TO_RAD: float = PI * 2.0 / 360.0
-RAD_TO_DEG: float = 1.0 / DEG_TO_RAD
+fi = float | int
+
+PI = 3.141592653589793
+DEG_TO_RAD = PI * 2.0 / 360.0
+RAD_TO_DEG = 1.0 / DEG_TO_RAD
 
 
 class M:
     @staticmethod
-    def round(n: int | float, digit: int = 1) -> int | float:
+    def to_rad(deg: float) -> fi: return deg * DEG_TO_RAD
+
+    @staticmethod
+    def to_deg(rad: float) -> fi: return rad * RAD_TO_DEG
+
+    @staticmethod
+    def round(n: fi, digit: int = 1) -> fi:
         return (n * 10 ** digit * 2 + 1) // 2 / 10 ** digit
 
     @staticmethod
-    def floored(n: int | float) -> int | float:
-        return n < decimal.Decimal(n)
-
-    @staticmethod
-    def floor(n: int | float, digit: int) -> int | float:
+    def floor(n: fi, digit: int) -> fi:
         pow: float = M.pow(10, digit)
         return np.floor(n * pow) / pow
 
     @staticmethod
-    def abs(n: int | float) -> int | float:
-        return n if n >= 0 else -n
+    def abs(n: fi) -> fi: return n if n >= 0 else -n
 
     @staticmethod
-    def sign(n: int | float) -> int:
-        return 1 if n > 0 else -1 if n < 0 else 0
+    def sign(n: fi) -> int: return 1 if n > 0 else -1 if n < 0 else 0
 
     @staticmethod
-    def pow(n: int | float, e: int) -> int | float:
-        '''n^e'''
+    def pow(n: fi, e: int) -> fi:
         if e == 0:
             return 1
         dst = n
@@ -39,11 +39,10 @@ class M:
         return dst
 
     @staticmethod
-    def digit(n) -> int:
-        return len(str(n).replace('.', ''))
+    def digit(n) -> int: return len(str(n).replace('.', ''))
 
     @staticmethod
-    def clamp(target, min=0, max=1) -> int | float:
+    def clamp(target, min: float, max: float) -> fi:
         return min if target < min else max if target > max else target
 
     @staticmethod
@@ -63,9 +62,7 @@ class M:
         return [i for i in range(2, n+1) if flags[i]]
 
     @staticmethod
-    def min(a: float, b: float) -> float:
-        return a if a < b else b
+    def min(a: float, b: float) -> float: return a if a < b else b
 
     @staticmethod
-    def max(a: float, b: float) -> float:
-        return a if a > b else b
+    def max(a: float, b: float) -> float: return a if a > b else b

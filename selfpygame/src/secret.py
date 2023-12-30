@@ -5,32 +5,30 @@ from hashlib import pbkdf2_hmac
 
 
 class MyAES:
-    def __init__(self, password: str) -> None:
+    def __init__(self, password, size=16) -> None:
         self.__salt = get_random_bytes(16)
         self.__password = password
         self.__iv = get_random_bytes(16)
+        self.__size = size
 
-    def en(self, src) -> bytes:
+    def en(self, src):
 
         key = pbkdf2_hmac(
             'sha256', bytes(self.__password, encoding='utf-8'),
             self.__salt,
             50000,
-            int(128 / 8)
+            self.__size
         )
 
-        aes = AES.new(key, AES.MODE_CBC, self.__iv)
         data = Padding.pad(src.encode('utf-8'), AES.block_size, 'pkcs7')
-        dst = aes.encrypt(data)
-        return dst
+        return AES.new(key, AES.MODE_CBC, self.__iv).encrypt(data)
 
-    def de(self, src) -> bytes:
+    def de(self, src):
         key = pbkdf2_hmac(
             'sha256',
             bytes(self.__password, encoding='utf-8'),
             self.__salt,
             50000,
-            int(128 / 8)
+            self.__size
         )
-        aes = AES.new(key, AES.MODE_CBC, self.__iv)
-        return aes.decrypt(src)
+        return AES.new(key, AES.MODE_CBC, self.__iv).decrypt(src)

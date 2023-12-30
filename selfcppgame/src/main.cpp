@@ -11,17 +11,17 @@ using namespace trrne;
 
 constexpr char N = '\n';
 
-void space(string name, char design, string dst)
+void space(string title, char design, string dst)
 {
     string line;
     for (int i = 0; i < 32; ++i)
     {
         line += design;
     }
-    cout << line << "|| " << name << " ||" << line << endl;
+    cout << line << "|| " << title << " ||" << line << endl;
     cout << dst << endl;
     string underline = line + line;
-    for (int i = 0; i < name.length() + 6; ++i)
+    for (int i = 0; i < title.length() + 6; ++i)
     {
         underline += design;
     }

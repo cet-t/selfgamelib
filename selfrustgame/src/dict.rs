@@ -1,5 +1,4 @@
-﻿use std::ops::Index;
-use std::{cmp::min, ptr::eq};
+﻿use std::{cmp::min, ptr::eq};
 
 #[derive(Debug, Clone)]
 pub struct Dict<TK, TV> {

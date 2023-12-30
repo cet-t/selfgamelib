@@ -18,12 +18,12 @@ def v2():
 
     a = V2(uniform(-10, 10), uniform(-10, 10))
     b = V2(uniform(-10, 10), uniform(-10, 10))
-    dst += '+a      : ' + (+a).to_str() + N
-    dst += '-b      : ' + (-b).to_str() + N
-    dst += 'a+b     : ' + (a+b).to_str() + N
-    dst += 'a-b     : ' + (a-b).to_str() + N
-    dst += 'a*b     : ' + (a*b).to_str() + N
-    dst += 'a/b     : ' + (a/b).to_str() + N
+    dst += '+a      : ' + (+a).__str__() + N
+    dst += '-b      : ' + (-b).__str__() + N
+    dst += 'a+b     : ' + (a+b).__str__() + N
+    dst += 'a-b     : ' + (a-b).__str__() + N
+    dst += 'a*b     : ' + (a*b).__str__() + N
+    dst += 'a/b     : ' + (a/b).__str__() + N
     # a += b
     # a -= b
     # a *= b
@@ -34,7 +34,7 @@ def v2():
 
 @prefix('lottery')
 def lottery():
-    dst = ''
+    dst: str = ''
 
     L: int = 100000
     weights: list[float] = [1.1, 0.75, 0.8, 0.79]

@@ -1,4 +1,4 @@
-﻿use std::ops::*;
+﻿use std::ops::{Add, Div, Mul, Sub};
 
 #[derive(Debug, Clone, Copy)]
 pub struct V3 {
