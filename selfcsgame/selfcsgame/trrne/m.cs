@@ -10,7 +10,7 @@ public static class M
 
     public static double Floor(double n, int digit)
     {
-        double e = Math.Pow(10, digit);
+        var e = Math.Pow(10, digit);
         return Math.Floor(e * n) / e;
     }
 
@@ -34,6 +34,5 @@ public static class M
     }
 
     public static ulong Permutation(int n, int r) => Factorial(n) / Factorial(n - r);
-    public static ulong? Combination(int n, int r)
-    => (r >= 0 && n >= r) ? null : Factorial(n) / (Factorial(r) * Factorial(n - r));
+    public static ulong? Combination(int n, int r) => (r >= 0 && n >= r) ? null : Factorial(n) / (Factorial(r) * Factorial(n - r));
 }

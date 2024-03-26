@@ -16,8 +16,8 @@ static int length(T(&array)[N]) {
 }
 
 template <typename U, typename T>
-unique_ptr<U> dynamic_unique_cast(unique_ptr<T> &&ptr) {
-	return unique_ptr<U>(dynamic_cast<U *>(ptr.release()));
+unique_ptr<U> dynamic_unique_cast(unique_ptr<T>&& ptr) {
+	return unique_ptr<U>(dynamic_cast<U*>(ptr.release()));
 }
 
 static string to_str(const bool a) {

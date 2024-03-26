@@ -15,18 +15,10 @@ public sealed class MyRSA(RSAEncryptionPadding padding)
 
     public static RSAEncryptionPadding PKCS1 => RSAEncryptionPadding.Pkcs1;
 
-    public static byte[] En(byte[] src, RSAEncryptionPadding? padding = null)
-    => rsa.Encrypt(src, padding is null ? PKCS1 : padding);
+    public static byte[] En(byte[] src, RSAEncryptionPadding? padding = null) => rsa.Encrypt(src, padding is null ? PKCS1 : padding);
+    public static byte[] En(string src, RSAEncryptionPadding? padding = null) => rsa.Encrypt(Encoding.UTF8.GetBytes(src), padding is null ? PKCS1 : padding);
+    public static string En2Str(byte[] src, RSAEncryptionPadding? padding = null) => Encoding.UTF8.GetString(rsa.Encrypt(src, padding is null ? PKCS1 : padding));
 
-    public static byte[] En(string src, RSAEncryptionPadding? padding = null)
-    => rsa.Encrypt(Encoding.UTF8.GetBytes(src), padding is null ? PKCS1 : padding);
-
-    public static string En2Str(byte[] src, RSAEncryptionPadding? padding = null)
-    => Encoding.UTF8.GetString(rsa.Encrypt(src, padding is null ? PKCS1 : padding));
-
-    public static byte[] De(byte[] src, RSAEncryptionPadding? padding = null)
-    => rsa.Decrypt(src, padding is null ? PKCS1 : padding);
-
-    public static string De2Str(byte[] src, RSAEncryptionPadding? padding = null)
-    => Encoding.UTF8.GetString(rsa.Decrypt(src, padding is null ? PKCS1 : padding));
+    public static byte[] De(byte[] src, RSAEncryptionPadding? padding = null) => rsa.Decrypt(src, padding is null ? PKCS1 : padding);
+    public static string De2Str(byte[] src, RSAEncryptionPadding? padding = null) => Encoding.UTF8.GetString(rsa.Decrypt(src, padding is null ? PKCS1 : padding));
 }

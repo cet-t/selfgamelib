@@ -1,12 +1,12 @@
 ﻿from random import uniform
 import numpy as np
 
-from src.v import V2
-from src.lottery import Lottery, LotteryPair
+from src.v import *
+from src.lottery import *
 from src.m import M
 from src.trrne import *
-from src.randomf import Rnd, STRTYPE
-from src.secret import MyAES
+from src.rand import *
+from src.secret import *
 
 
 N: str = '\n'
@@ -72,7 +72,21 @@ def aes():
     print(dst)
 
 
+@prefix('random')
+def rand():
+    dst = ''
+    dst += Rand.randstr(8, STRTYPE.ALPHABET) + N
+    dst += Rand.randstr(8, STRTYPE.ALPHABET) + N
+    dst += Rand.randstr(8, STRTYPE.ALPHABET) + N
+    dst += Rand.randstr(8, STRTYPE.ALPHABET) + N
+    dst += Rand.randstr(8, STRTYPE.ALPHABET) + N
+    dst += Rand.randstr(8, STRTYPE.ALPHABET) + N
+
+    print(dst)
+
+
 if __name__ == '__main__':
     v2()
     lottery()
     aes()
+    rand()

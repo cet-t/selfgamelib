@@ -139,6 +139,7 @@
     <ClInclude Include="numpp.h" />
     <ClInclude Include="rnd.h" />
     <ClInclude Include="trrne.h" />
+    <ClInclude Include="trrne.hpp" />
     <ClInclude Include="v2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

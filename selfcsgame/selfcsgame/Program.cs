@@ -3,7 +3,9 @@ using System.Security.Cryptography;
 using trrne;
 
 Console.OutputEncoding = Encoding.GetEncoding("utf-8");
+Console.BackgroundColor = ConsoleColor.Black;
 
+string Reverse(string src) => string.Join("", src.Reverse());
 void println(object obj) => Console.WriteLine(obj);
 double rand(double min = -10, double max = 10) => new Random().NextDouble() * (max - min) + min;
 
@@ -15,16 +17,17 @@ void Loop<T>(int loop, Func<T> func)
     }
 }
 
-void Space(in string title, in char design, in Func<object> func)
+void Space(in string title, in char design, in Func<object> func, int lineLength = 32)
 {
     string line = "";
-    for (int i = 0; i < 32; ++i)
+    const string MON = "* ";
+    for (int i = 0; i < lineLength; ++i)
     {
         line += design;
     }
-    println(line + "|| " + title + " ||" + line);
+    println(line + MON + title + Reverse(MON) + line);
     println(func());
-    string dst = line + line; // + design + design;
+    string dst = line + line;
     for (int i = 0; i < title.Length + 6; ++i)
     {
         dst += design;
@@ -134,22 +137,24 @@ Space("rsa", '-', () =>
     const string SRC = "karachan";
     string dst = "src: " + SRC + N;
 
-    dst += "=========dynamic=========" + N;
+    Space("dynamic", '=', () =>
     {
         MyRSA mrsa = new(RSAEncryptionPadding.Pkcs1);
         byte[] en = mrsa.En(SRC);
         dst += "en      : {" + Encoding.UTF8.GetString(en) + "}" + N + N;
         dst += "de      : {" + mrsa.De2Str(en) + "}" + N;
-    }
+        return dst;
+    }, 16);
 
-    dst += "=========static=========" + N;
+    Space("static", '=', () =>
     {
         byte[] en = MyRSA.En(SRC);
         dst += "en      : {" + Encoding.UTF8.GetString(en) + "}" + N + N;
         dst += "de      : {" + MyRSA.De2Str(en) + "}" + N;
-    }
+        return dst;
+    }, 16);
 
-    return dst;
+    return "";
 });
 
 Space("math", '-', () =>
@@ -168,6 +173,18 @@ Space("math", '-', () =>
 
     return dst;
 });
+
+// Clamp test
+int ni = 0;
+double nd = 0;
+float nf = 0;
+for (int i = 0; i < 100; ++i)
+{
+    ni = int.Clamp(i, 25, 75);
+    nd = double.Clamp(i, 25, 75);
+    nf = float.Clamp(i, 25, 75);
+    Console.WriteLine($"int: {ni}, double: {nd}, float: {nf}");
+}
 
 /*
 str padding     https://kuroeveryday.blogspot.com/2014/03/padding.html

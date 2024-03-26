@@ -9,17 +9,17 @@ class STRTYPE(Enum):
     NUM = 3
 
 
-class Rnd:
+class Rand:
     __ALPHABETS: str = 'abcdefghijklmnopqrstuvwxyz'
     __NUMBERS: str = '1234567890'
     __JAPANESES: str = 'あいうえおかきくけこがぎぐげごさしすせそざじずぜぞたちつてとだぢづでどなにぬねのはひふへほばびぶべぼぱぴぷぺぽまみむめもやゆよらりるれろわをん'
 
     @staticmethod
     def normal_char(n: int) -> list:
-        chars = list(Rnd.__ALPHABETS)
+        chars = list(Rand.__ALPHABETS)
         ls: list = []
         for _ in range(n := len(chars)-1 if n > len(chars) else n-1):
-            ls.append(chars[Rnd().randint(0, n)])
+            ls.append(chars[Rand().randint(0, n)])
         return ls
 
     @staticmethod
@@ -30,17 +30,17 @@ class Rnd:
         def mixer(src: str) -> str:
             dst: str = ''
             for _ in range(n):
-                dst += src[Rnd.randint(max=len(src)-1)]
+                dst += src[Rand.randint(max=len(src)-1)]
             return dst
 
         if type == STRTYPE.ALPHABET:
-            return mixer(Rnd.__ALPHABETS)
+            return mixer(Rand.__ALPHABETS)
         elif type == STRTYPE.JP:
-            return mixer(Rnd.__JAPANESES)
+            return mixer(Rand.__JAPANESES)
         elif type == STRTYPE.NUM:
-            return mixer(Rnd.__NUMBERS)
+            return mixer(Rand.__NUMBERS)
         else:
-            return mixer(Rnd.__ALPHABETS + Rnd.__NUMBERS)
+            return mixer(Rand.__ALPHABETS + Rand.__NUMBERS)
 
     @staticmethod
     def randint(min=0, max=0) -> int:
